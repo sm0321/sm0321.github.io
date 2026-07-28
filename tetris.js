@@ -59,7 +59,7 @@
   function render() {
     cells.forEach((cell) => { cell.className = 'tetris-cell'; cell.style.removeProperty('--tetris-color'); });
     grid.forEach((row, y) => row.forEach((type, x) => { if (type) { const cell = cells[y * WIDTH + x]; cell.classList.add('filled'); cell.style.setProperty('--tetris-color', COLORS[type]); } }));
-    if (current) current.forEach((row, y) => row.forEach((value, x) => { if (value && currentY + y >= 0) { const cell = cells[(currentY + y) * WIDTH + currentX + x]; if (cell) { cell.classList.add('filled'); cell.style.setProperty('--tetris-color', COLORS[current.type]); } } }));
+    if (current) current.matrix.forEach((row, y) => row.forEach((value, x) => { if (value && currentY + y >= 0) { const cell = cells[(currentY + y) * WIDTH + currentX + x]; if (cell) { cell.classList.add('filled'); cell.style.setProperty('--tetris-color', COLORS[current.type]); } } }));
     updateScore();
   }
 
