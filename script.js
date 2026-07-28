@@ -14,4 +14,11 @@
       toggle.setAttribute('aria-expanded', 'false');
     }
   });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      nav.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
 })();
