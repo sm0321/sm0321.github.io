@@ -9,7 +9,8 @@
   const message = document.querySelector('#spot-message');
   if (!left || !right || !start || !restart || !foundEl || !totalEl || !message) return;
   const scenes = [left.getContext('2d'), right.getContext('2d')];
-  const differences = [{ x: 78, y: 70, r: 20 }, { x: 250, y: 125, r: 24 }, { x: 150, y: 195, r: 18 }];
+  // Match hit regions to the actual visual changes drawn in drawScene.
+  const differences = [{ x: 97, y: 152, r: 18 }, { x: 220, y: 170, r: 16 }, { x: 191, y: 112, r: 16 }];
   let started = false;
   let found = new Set();
   totalEl.textContent = String(differences.length);
@@ -20,6 +21,6 @@
   };
   const draw = () => { drawScene(scenes[0], false); drawScene(scenes[1], true); found.forEach((index) => { [left, right].forEach((canvas) => { const ctx = canvas.getContext('2d'); const d = differences[index]; ctx.strokeStyle = '#fff'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2); ctx.stroke(); }); }); };
   const reset = () => { found = new Set(); started = true; foundEl.textContent = '0'; message.textContent = '차이를 찾아보세요.'; draw(); };
-  const hit = (event) => { if (!started) return; const rect = event.currentTarget.getBoundingClientRect(); const scaleX = event.currentTarget.width / rect.width; const scaleY = event.currentTarget.height / rect.height; const x = (event.clientX - rect.left) * scaleX; const y = (event.clientY - rect.top) * scaleY; differences.forEach((d, index) => { if (Math.hypot(x - d.x, y - d.y) <= d.r + 12) found.add(index); }); foundEl.textContent = String(found.size); if (found.size === differences.length) { message.textContent = '모든 차이를 찾았습니다!'; started = false; } else draw(); };
+  const hit = (event) => { if (!started) return; const rect = event.currentTarget.getBoundingClientRect(); const scaleX = event.currentTarget.width / rect.width; const scaleY = event.currentTarget.height / rect.height; const x = (event.clientX - rect.left) * scaleX; const y = (event.clientY - rect.top) * scaleY; differences.forEach((d, index) => { if (Math.hypot(x - d.x, y - d.y) <= d.r) found.add(index); }); foundEl.textContent = String(found.size); if (found.size === differences.length) { message.textContent = '모든 차이를 찾았습니다!'; started = false; } else draw(); };
   [left, right].forEach((canvas) => canvas.addEventListener('click', hit)); start.addEventListener('click', reset); restart.addEventListener('click', reset); draw();
 })();
