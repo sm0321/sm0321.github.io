@@ -8,108 +8,40 @@
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
     <script src="game.js" defer></script>
-    <script src="tetris.js" defer></script>
+    <script src="spot-difference.js" defer></script>
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="#home">Angelina</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">메뉴</button>
       <nav id="primary-nav" class="primary-nav" aria-label="주요 메뉴">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#games">Games</a>
-        <a href="#contact">Contact</a>
+        <a href="#home">Home</a><a href="#about">About</a><a href="#experience">Experience</a><a href="#games">Games</a><a href="#contact">Contact</a>
       </nav>
     </header>
-
     <main id="top">
       <section id="home" class="hero" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow">S/W ENGINEER</p>
-          <h1 id="hero-title">안녕하세요, Angelina입니다. 야옹</h1>
-          <p>아이디어를 안정적인 디지털 경험으로 연결합니다.</p>
-        </div>
+        <div class="hero-copy"><p class="eyebrow">S/W ENGINEER</p><h1 id="hero-title">안녕하세요, Angelina입니다. 야옹</h1><p>아이디어를 안정적인 디지털 경험으로 연결합니다.</p></div>
         <img class="profile-art" src="assets/장화신은고양이.png" alt="귀여운 고양이 일러스트">
       </section>
-
-      <section id="about" class="section" aria-labelledby="about-title">
-        <h2 id="about-title">About</h2>
-        <p>소프트웨어 엔지니어로서 명확하고 즐거운 사용자 경험을 만듭니다.</p>
-      </section>
-
-      <section id="experience" class="section" aria-labelledby="experience-title">
-        <h2 id="experience-title">Experience</h2>
-        <p>삼성전자 · S/W 엔지니어</p>
-      </section>
-
+      <section id="about" class="section" aria-labelledby="about-title"><h2 id="about-title">About</h2><p>소프트웨어 엔지니어로서 명확하고 즐거운 사용자 경험을 만듭니다.</p></section>
+      <section id="experience" class="section" aria-labelledby="experience-title"><h2 id="experience-title">Experience</h2><p>삼성전자 · S/W 엔지니어</p></section>
       <section id="games" class="section games-section" aria-labelledby="games-title">
-        <h2 id="games-title">Games</h2>
-        <p>키보드, WASD, 스와이프 또는 버튼으로 지렁이를 움직여 보세요.</p>
+        <h2 id="games-title">Games</h2><p>지렁이 게임과 틀린그림 찾기를 즐겨보세요.</p>
         <div class="game-panel">
-          <label class="level-picker" for="game-level">레벨
-            <select id="game-level">
-              <option value="1">1단계 · 천천히</option>
-              <option value="2" selected>2단계 · 보통</option>
-              <option value="3">3단계 · 빠르게</option>
-            </select>
-          </label>
-          <div class="game-stats" aria-live="polite">
-            <span>점수 <strong id="score">0</strong></span>
-            <span>최고 점수 <strong id="high-score">0</strong></span>
-            <span id="game-status">시작 버튼을 눌러 주세요.</span>
-          </div>
+          <label class="level-picker" for="game-level">레벨<select id="game-level"><option value="1">1단계 · 천천히</option><option value="2" selected>2단계 · 보통</option><option value="3">3단계 · 빠르게</option></select></label>
+          <div class="game-stats" aria-live="polite"><span>점수 <strong id="score">0</strong></span><span>최고 점수 <strong id="high-score">0</strong></span><span id="game-status">시작 버튼을 눌러 주세요.</span></div>
           <div id="game-board" class="game-board" role="grid" aria-label="20 곱하기 20 지렁이 게임 보드"></div>
-          <div class="game-actions">
-            <button id="start-game" type="button">시작</button>
-            <button id="pause-game" type="button" disabled>일시정지</button>
-            <button id="restart-game" type="button">재시작</button>
-          </div>
-          <div class="direction-pad" aria-label="모바일 방향 조작">
-            <button type="button" data-direction="up" aria-label="위로 이동">▲</button>
-            <div>
-              <button type="button" data-direction="left" aria-label="왼쪽으로 이동">◀</button>
-              <button type="button" data-direction="down" aria-label="아래로 이동">▼</button>
-              <button type="button" data-direction="right" aria-label="오른쪽으로 이동">▶</button>
-            </div>
-          </div>
-          <p class="game-help">방향키/WASD: 이동 · Space: 일시정지</p>
+          <div class="game-actions"><button id="start-game" type="button">시작</button><button id="pause-game" type="button" disabled>일시정지</button><button id="restart-game" type="button">재시작</button></div>
+          <div class="direction-pad" aria-label="모바일 방향 조작"><button type="button" data-direction="up" aria-label="위로 이동">▲</button><div><button type="button" data-direction="left" aria-label="왼쪽으로 이동">◀</button><button type="button" data-direction="down" aria-label="아래로 이동">▼</button><button type="button" data-direction="right" aria-label="오른쪽으로 이동">▶</button></div></div>
         </div>
-
-        <div id="tetris-game" class="tetris-game" aria-labelledby="tetris-title">
-          <h3 id="tetris-title">테트리스</h3>
-          <p>블록을 회전하고 줄을 완성해 보세요.</p>
-          <div class="tetris-layout">
-            <div id="tetris-board" class="tetris-board" role="grid" aria-label="10 곱하기 20 테트리스 보드"></div>
-            <aside class="tetris-side" aria-live="polite">
-              <p>점수 <strong id="tetris-score">0</strong></p>
-              <p>레벨 <strong id="tetris-level">1</strong></p>
-              <p>최고 점수 <strong id="tetris-high-score">0</strong></p>
-              <p id="tetris-status">시작 버튼을 눌러 주세요.</p>
-              <p class="next-label">다음 블록</p>
-              <div id="tetris-next" class="tetris-next" aria-label="다음 블록 미리보기"></div>
-            </aside>
-          </div>
-          <div class="tetris-actions">
-            <button id="tetris-start" type="button">시작</button>
-            <button id="tetris-pause" type="button" disabled>일시정지</button>
-            <button id="tetris-restart" type="button">재시작</button>
-          </div>
-          <div class="tetris-controls" aria-label="테트리스 모바일 조작">
-            <button type="button" data-tetris-action="left" aria-label="왼쪽 이동">◀</button>
-            <button type="button" data-tetris-action="rotate" aria-label="회전">↻</button>
-            <button type="button" data-tetris-action="right" aria-label="오른쪽 이동">▶</button>
-            <button type="button" data-tetris-action="down" aria-label="아래 이동">▼</button>
-            <button type="button" data-tetris-action="drop" aria-label="즉시 낙하">⤓</button>
-          </div>
-          <p class="game-help">← → 이동 · ↑ 회전 · ↓ 내리기 · Space 즉시 낙하 · P 일시정지</p>
+        <div class="spot-game" aria-labelledby="spot-title">
+          <h3 id="spot-title">틀린그림 찾기</h3><p>두 장면에서 다른 점을 찾아보세요.</p>
+          <div class="spot-status" aria-live="polite"><span>찾은 차이: <strong id="spot-found">0</strong>/<strong id="spot-total">3</strong></span><span id="spot-message">시작 버튼을 눌러 주세요.</span></div>
+          <div class="spot-scenes"><div><p>장면 A</p><canvas id="spot-left" width="360" height="240" aria-label="틀린그림 장면 A"></canvas></div><div><p>장면 B</p><canvas id="spot-right" width="360" height="240" aria-label="틀린그림 장면 B"></canvas></div></div>
+          <button id="spot-start" type="button">게임 시작</button><button id="spot-restart" type="button">다시 시작</button>
         </div>
       </section>
-
-      <section id="contact" class="section" aria-labelledby="contact-title">
-        <h2 id="contact-title">Contact</h2>
-        <p>텔레파시로 연락주세요</p>
-      </section>
+      <section id="contact" class="section" aria-labelledby="contact-title"><h2 id="contact-title">Contact</h2><p>텔레파시로 연락주세요</p></section>
     </main>
   </body>
 </html>
