@@ -2,8 +2,12 @@
   'use strict';
 
   const SIZE = 20;
-  const STEP_MS = 180;
   const HIGH_SCORE_KEY = 'angelina-snake-high-score';
+  const LEVELS = {
+    1: { interval: 240 },
+    2: { interval: 180 },
+    3: { interval: 120 }
+  };
   const board = document.querySelector('#game-board');
   const scoreEl = document.querySelector('#score');
   const highScoreEl = document.querySelector('#high-score');
@@ -11,7 +15,8 @@
   const startButton = document.querySelector('#start-game');
   const pauseButton = document.querySelector('#pause-game');
   const restartButton = document.querySelector('#restart-game');
-  if (!board || !scoreEl || !highScoreEl || !statusEl || !startButton || !pauseButton || !restartButton) return;
+  const levelSelect = document.querySelector('#game-level');
+  if (!board || !scoreEl || !highScoreEl || !statusEl || !startButton || !pauseButton || !restartButton || !levelSelect) return;
 
   const cells = [];
   let snake = [];
@@ -19,7 +24,9 @@
   let direction = { x: 1, y: 0 };
   let nextDirection = { x: 1, y: 0 };
   let score = 0;
-  let highScore = Number(localStorage.getItem(HIGH_SCORE_KEY)) || 0;
+  let currentLevel = Number(levelSelect.value) || 2;
+  let highScores = {};
+  try { highScores = JSON.parse(localStorage.getItem(HIGH_SCORE_KEY)) || {}; } catch { highScores = {}; }
   let timerId = null;
   let running = false;
   let paused = false;
@@ -35,9 +42,10 @@
   const samePoint = (a, b) => a.x === b.x && a.y === b.y;
   const cellAt = (point) => cells[point.y * SIZE + point.x];
   const setStatus = (message) => { statusEl.textContent = message; };
+  const currentHighScore = () => Number(highScores[currentLevel]) || 0;
   const updateScores = () => {
     scoreEl.textContent = String(score);
-    highScoreEl.textContent = String(highScore);
+    highScoreEl.textContent = String(currentHighScore());
   };
 
   function placeFood() {
@@ -85,7 +93,10 @@
     snake.unshift(head);
     if (food && samePoint(head, food)) {
       score += 1;
-      if (score > highScore) { highScore = score; localStorage.setItem(HIGH_SCORE_KEY, String(highScore)); }
+      if (score > currentHighScore()) {
+        highScores[currentLevel] = score;
+        localStorage.setItem(HIGH_SCORE_KEY, JSON.stringify(highScores));
+      }
       placeFood();
     } else {
       snake.pop();
@@ -106,7 +117,7 @@
     pauseButton.textContent = '일시정지';
     setStatus('게임 중');
     render();
-    timerId = window.setInterval(tick, STEP_MS);
+    timerId = window.setInterval(tick, LEVELS[currentLevel].interval);
   }
 
   function togglePause() {
@@ -151,6 +162,12 @@
   startButton.addEventListener('click', startGame);
   pauseButton.addEventListener('click', togglePause);
   restartButton.addEventListener('click', startGame);
+  levelSelect.addEventListener('change', () => {
+    currentLevel = Number(levelSelect.value) || 2;
+    updateScores();
+    if (running) startGame();
+    else setStatus(`${currentLevel}단계 선택됨`);
+  });
   updateScores();
   render();
 })();
