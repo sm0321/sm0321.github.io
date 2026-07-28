@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
     <script src="game.js" defer></script>
+    <script src="tetris.js" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -73,6 +74,35 @@
             </div>
           </div>
           <p class="game-help">방향키/WASD: 이동 · Space: 일시정지</p>
+        </div>
+
+        <div id="tetris-game" class="tetris-game" aria-labelledby="tetris-title">
+          <h3 id="tetris-title">테트리스</h3>
+          <p>블록을 회전하고 줄을 완성해 보세요.</p>
+          <div class="tetris-layout">
+            <div id="tetris-board" class="tetris-board" role="grid" aria-label="10 곱하기 20 테트리스 보드"></div>
+            <aside class="tetris-side" aria-live="polite">
+              <p>점수 <strong id="tetris-score">0</strong></p>
+              <p>레벨 <strong id="tetris-level">1</strong></p>
+              <p>최고 점수 <strong id="tetris-high-score">0</strong></p>
+              <p id="tetris-status">시작 버튼을 눌러 주세요.</p>
+              <p class="next-label">다음 블록</p>
+              <div id="tetris-next" class="tetris-next" aria-label="다음 블록 미리보기"></div>
+            </aside>
+          </div>
+          <div class="tetris-actions">
+            <button id="tetris-start" type="button">시작</button>
+            <button id="tetris-pause" type="button" disabled>일시정지</button>
+            <button id="tetris-restart" type="button">재시작</button>
+          </div>
+          <div class="tetris-controls" aria-label="테트리스 모바일 조작">
+            <button type="button" data-tetris-action="left" aria-label="왼쪽 이동">◀</button>
+            <button type="button" data-tetris-action="rotate" aria-label="회전">↻</button>
+            <button type="button" data-tetris-action="right" aria-label="오른쪽 이동">▶</button>
+            <button type="button" data-tetris-action="down" aria-label="아래 이동">▼</button>
+            <button type="button" data-tetris-action="drop" aria-label="즉시 낙하">⤓</button>
+          </div>
+          <p class="game-help">← → 이동 · ↑ 회전 · ↓ 내리기 · Space 즉시 낙하 · P 일시정지</p>
         </div>
       </section>
 

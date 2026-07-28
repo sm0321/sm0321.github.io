@@ -57,6 +57,27 @@ main { max-width: 1080px; margin: 0 auto; }
 .direction-pad > div { display: flex; gap: .3rem; }
 .direction-pad button { min-width: 2.8rem; padding: .45rem; }
 .game-help { margin-bottom: 0; text-align: center; font-size: .85rem; }
+.tetris-game { margin-top: 2rem; padding-top: 1.5rem; border-top: 2px dashed #e4d9ff; }
+.tetris-layout { display: flex; align-items: flex-start; justify-content: center; gap: 1rem; }
+.tetris-board { display: grid; grid-template-columns: repeat(10, 1fr); aspect-ratio: 1 / 2; width: min(62vw, 20rem); border: .35rem solid #6745b8; border-radius: .6rem; background: #efe7ff; touch-action: none; }
+.tetris-cell { min-width: 0; border: 1px solid rgb(255 255 255 / 35%); background: #f8f4ff; }
+.tetris-cell.filled { background: var(--tetris-color, #6745b8); }
+.tetris-side { min-width: 8rem; font-size: .9rem; }
+.tetris-side p { margin: .35rem 0; }
+.tetris-side strong { color: #6745b8; }
+.next-label { margin-top: 1rem !important; font-weight: 700; }
+.tetris-next { display: grid; grid-template-columns: repeat(4, 1fr); width: 6rem; aspect-ratio: 1; border: 1px solid #d8c7ff; background: #f8f4ff; }
+.tetris-next .tetris-cell { border: 0; }
+.tetris-actions, .tetris-controls { display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+.tetris-actions button, .tetris-controls button { min-width: 3rem; border: 1px solid #6745b8; border-radius: .5rem; padding: .55rem .8rem; color: #fff; background: #6745b8; font: inherit; cursor: pointer; }
+.tetris-actions button:disabled { cursor: not-allowed; opacity: .45; }
+@media (max-width: 640px) {
+  .tetris-layout { align-items: center; flex-direction: column; }
+  .tetris-board { width: min(78vw, 20rem); }
+  .tetris-side { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; gap: .25rem; }
+  .tetris-side p { text-align: center; }
+  .tetris-next { grid-column: span 3; margin: .5rem auto 0; }
+}
 @media (max-width: 640px) {
   .hero { align-items: flex-start; flex-direction: column-reverse; }
   .profile-art { width: 8rem; }
